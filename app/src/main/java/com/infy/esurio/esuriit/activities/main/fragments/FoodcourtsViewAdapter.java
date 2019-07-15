@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.infy.esurio.R;
@@ -80,7 +81,7 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
         FoodcourtService.putImage(map.get(position), holder.iv_foodcourts_img);
         FoodcourtService.putDistance(map.get(position), holder.tv_foodcourts_distance);
         FoodcourtService.putServiceTime(map.get(position), holder.tv_foodcourts_servtime);
-        FoodcourtService.putOccupancy(map.get(position), holder.tv_foodcourts_occupancy);
+        FoodcourtService.putOccupancy(map.get(position), holder.pb_foodcourts_occupancy);
         FoodcourtService.putMapIntent(map.get(position), holder.iv_location);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +104,7 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
         public final TextView tv_foodcourts_name;
         public final TextView tv_foodcourts_distance;
         private final TextView tv_foodcourts_servtime;
-        private final TextView tv_foodcourts_occupancy;
+        private final ProgressBar pb_foodcourts_occupancy;
         private final ImageView iv_foodcourts_img;
         private final ImageView iv_location;
         public FoodcourtsDTO item;
@@ -114,7 +115,7 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
             tv_foodcourts_name = view.findViewById(R.id.tv_foodcourts_name);
             tv_foodcourts_distance = view.findViewById(R.id.tv_foodcourts_distance);
             tv_foodcourts_servtime = view.findViewById(R.id.tv_foodcourts_servtime);
-            tv_foodcourts_occupancy = view.findViewById(R.id.tv_foodcourts_occupancy);
+            pb_foodcourts_occupancy = view.findViewById(R.id.pb_foodcourts_occupancy);
             iv_foodcourts_img = view.findViewById(R.id.iv_foodcourts_img);
             iv_location = view.findViewById(R.id.iv_location);
 

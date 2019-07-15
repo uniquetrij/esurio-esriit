@@ -2,9 +2,11 @@ package com.infy.esurio.esuriit.app.services;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.databinding.ObservableArrayList;
@@ -119,27 +121,34 @@ public class FakerService {
         view.setText(mins + " mins");
     }
 
-    public static void foodcourtsPutOccupancy(FoodcourtsDTO dto, TextView view) {
+    public static void foodcourtsPutOccupancy(FoodcourtsDTO dto, ProgressBar view) {
         Integer color = null;
+        Integer occupancy = null;
         switch (dto.getIdentifier()) {
             case "heritage":
                 color = RED;
+                occupancy = 90;
                 break;
             case "terminal":
                 color = ORANGE;
+                occupancy = 60;
                 break;
             case "golconda":
                 color = GREEN;
+                occupancy = 20;
                 break;
             case "lotus":
                 color = GREEN;
+                occupancy = 30;
                 break;
             case "b47":
                 color = RED;
+                occupancy = 80;
                 break;
 
         }
-        view.setBackgroundColor(color);
+        view.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        view.setProgress(occupancy);
     }
 
     public static void foodcourtsPutMapIntent(FoodcourtsDTO dto, ImageView view) {

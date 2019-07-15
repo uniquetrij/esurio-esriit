@@ -2,6 +2,7 @@ package com.infy.esurio.esuriit.app.services;
 
 import android.graphics.Color;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.databinding.ObservableList;
@@ -38,7 +39,7 @@ public class FoodcourtService {
         FakerService.foodcourtsPutServiceTime(dto,view);
     }
 
-    public static void putOccupancy(FoodcourtsDTO dto, TextView view){
+    public static void putOccupancy(FoodcourtsDTO dto, ProgressBar view){
         FakerService.foodcourtsPutOccupancy(dto,view);
     }
 
