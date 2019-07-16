@@ -7,28 +7,45 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.github.nkzawa.socketio.client.IO;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.infy.esurio.R;
 import com.infy.esurio.esuriit.activities.main.fragments.FoodcourtListFragment;
+import com.infy.esurio.esuriit.activities.main.fragments.OutletListFragment;
+import com.infy.esurio.esuriit.activities.main.fragments.ServingsListFragment;
 import com.infy.esurio.esuriit.app.This;
-import com.infy.esurio.esuriit.app.services.FakerService;
-import com.infy.esurio.esuriit.app.services.FoodcourtService;
 import com.infy.esurio.middleware.DTO.FoodcourtsDTO;
+import com.infy.esurio.middleware.DTO.OutletsDTO;
+import com.infy.esurio.middleware.DTO.ServingsDTO;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FoodcourtListFragment.OnOrdersItemClickedListener {
+public class MainActivity extends AppCompatActivity implements FoodcourtListFragment.OnFoodcourtsItemClickedListener,
+        OutletListFragment.OnOutletsItemClickedListener, ServingsListFragment.OnServingsItemClickedListener {
     private static final String TAG = "MainActivity";
     private TextView mTextMessage;
+    private List<Fragment> fragmentStack = new ArrayList<>();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -37,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements FoodcourtListFrag
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
                     loadFragment(new FoodcourtListFragment());
                     return true;
                 case R.id.navigation_dashboard:
@@ -50,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements FoodcourtListFrag
             return false;
         }
     };
+    private TextView tv_actionbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,30 +90,74 @@ public class MainActivity extends AppCompatActivity implements FoodcourtListFrag
         }
 
 
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        This.FCM_TOKEN.wrap(task.getResult().getToken());
+                        String msg = getString(R.string.msg_token_fmt, This.FCM_TOKEN.self());
+                        Log.d(TAG, msg);
+                    }
+                });
+
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setCustomView(R.layout.action_bar);
+        View view = getSupportActionBar().getCustomView();
+
 
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
+
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        loadFragment(new FoodcourtListFragment());
+
+
+
+//        loadFragment(new ServingsListFragment());
+    }
+
+
+    private boolean loadFragment(Fragment fragment) {
+        Log.d(TAG, "loadFragment");
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.fragment_container, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            moveTaskToBack(true);
+        } else {
+            getSupportFragmentManager().popBackStack();
+        }
     }
 
     @Override
     public void onListFragmentInteraction(FoodcourtsDTO item) {
-        Toast.makeText(getApplicationContext(), item.getIdentifier(), Toast.LENGTH_LONG).show();
+        loadFragment(new OutletListFragment());
     }
 
-    private boolean loadFragment(Fragment fragment) {
-        Log.d(TAG, "loadFragment");
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
+    @Override
+    public void onListFragmentInteraction(OutletsDTO item) {
+        loadFragment(new ServingsListFragment());
     }
+
+
+    @Override
+    public void onListFragmentInteraction(ServingsDTO item) {
+
+    }
+
 
 }

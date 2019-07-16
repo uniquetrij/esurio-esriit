@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "126874051250",
+    "firebase_url": "https://esurio-6bc89.firebaseio.com",
+    "project_id": "esurio-6bc89",
+    "storage_bucket": "esurio-6bc89.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126874051250:android:e10ed04d8d59ccca",
+        "android_client_info": {
+          "package_name": "com.infy.esurio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126874051250-1320tjapodkcko4025s8vbg8ov73uoe5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.infy.esurio",
+            "certificate_hash": "eb66149e46bda81a039fdcfe1cf19b73736b0c29"
+          }
+        },
+        {
+          "client_id": "126874051250-7j1htu38og9m0ngd5dak6673kkb9ismu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYcF62CC0yjKCjk3AtHx3nHTWGbACgLk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126874051250-7j1htu38og9m0ngd5dak6673kkb9ismu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -41,3 +41,5 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.4'
 
 }
+
+apply plugin: 'com.google.gms.google-services'

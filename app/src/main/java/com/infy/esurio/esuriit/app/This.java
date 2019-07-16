@@ -3,6 +3,7 @@ package com.infy.esurio.esuriit.app;
 import android.app.Application;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.graphics.Color;
 
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableArrayMap;
@@ -47,4 +48,13 @@ public class This {
 
 
     public static final ObservableList<FoodcourtsDTO> FOODCOURTS = new ObservableArrayList<>();
+    public static final ObservableList<OutletsDTO> OUTLETS = new ObservableArrayList<>();
+    public static final ObservableList<ServingsDTO> SERVINGS = new ObservableArrayList<>();
+
+    public static class COLORS{
+        public static int ORANGE = Color.parseColor("#F57F17");
+        public static int GREEN = Color.parseColor("#1B5E20");
+        public static int RED = Color.parseColor("#B71C1C");
+    }
+
 }

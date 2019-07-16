@@ -3,9 +3,6 @@ package com.infy.esurio.esuriit.activities.main.fragments;
 import androidx.databinding.ObservableList;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.media.Image;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +13,6 @@ import android.widget.TextView;
 
 import com.infy.esurio.R;
 
-import com.infy.esurio.esuriit.activities.main.fragments.dummy.DummyContent.DummyItem;
-import com.infy.esurio.esuriit.app.This;
 import com.infy.esurio.esuriit.app.services.FoodcourtService;
 import com.infy.esurio.middleware.DTO.FoodcourtsDTO;
 
@@ -31,9 +26,9 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
     private static final String TAG = "FoodcourtsViewAdapter";
 
     private final ObservableList<FoodcourtsDTO> map;
-    private final FoodcourtListFragment.OnOrdersItemClickedListener listener;
+    private final FoodcourtListFragment.OnFoodcourtsItemClickedListener listener;
 
-    public FoodcourtsViewAdapter(ObservableList<FoodcourtsDTO> items, FoodcourtListFragment.OnOrdersItemClickedListener listener) {
+    public FoodcourtsViewAdapter(ObservableList<FoodcourtsDTO> items, FoodcourtListFragment.OnFoodcourtsItemClickedListener listener) {
         Log.d(TAG, "OrdersViewAdapter");
         this.map = items;
         this.map.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<FoodcourtsDTO>>() {
@@ -78,11 +73,11 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.item = map.get(position);
         FoodcourtService.putName(map.get(position), holder.tv_foodcourts_name);
-        FoodcourtService.putImage(map.get(position), holder.iv_foodcourts_img);
+        FoodcourtService.putImage(map.get(position), holder.iv_foodcourts);
         FoodcourtService.putDistance(map.get(position), holder.tv_foodcourts_distance);
-        FoodcourtService.putServiceTime(map.get(position), holder.tv_foodcourts_servtime);
+        FoodcourtService.putNoise(map.get(position), holder.pb_foodcourts_noise);
         FoodcourtService.putOccupancy(map.get(position), holder.pb_foodcourts_occupancy);
-        FoodcourtService.putMapIntent(map.get(position), holder.iv_location);
+        FoodcourtService.putMapIntent(map.get(position), holder.iv_foodcourt_location);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,10 +98,10 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
         public final View mView;
         public final TextView tv_foodcourts_name;
         public final TextView tv_foodcourts_distance;
-        private final TextView tv_foodcourts_servtime;
+        private final ProgressBar pb_foodcourts_noise;
         private final ProgressBar pb_foodcourts_occupancy;
-        private final ImageView iv_foodcourts_img;
-        private final ImageView iv_location;
+        private final ImageView iv_foodcourts;
+        private final ImageView iv_foodcourt_location;
         public FoodcourtsDTO item;
 
         public ViewHolder(View view) {
@@ -114,10 +109,10 @@ public class FoodcourtsViewAdapter extends RecyclerView.Adapter<FoodcourtsViewAd
             mView = view;
             tv_foodcourts_name = view.findViewById(R.id.tv_foodcourts_name);
             tv_foodcourts_distance = view.findViewById(R.id.tv_foodcourts_distance);
-            tv_foodcourts_servtime = view.findViewById(R.id.tv_foodcourts_servtime);
+            pb_foodcourts_noise = view.findViewById(R.id.pb_foodcourts_noise);
             pb_foodcourts_occupancy = view.findViewById(R.id.pb_foodcourts_occupancy);
-            iv_foodcourts_img = view.findViewById(R.id.iv_foodcourts_img);
-            iv_location = view.findViewById(R.id.iv_location);
+            iv_foodcourts = view.findViewById(R.id.iv_foodcourts);
+            iv_foodcourt_location = view.findViewById(R.id.iv_foodcourt_location);
 
 
 //            mContentView = view.findViewById(R.id.item_content);

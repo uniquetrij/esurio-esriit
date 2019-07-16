@@ -14,4 +14,5 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="default_notification_channel_id">esurio-esuriit</string>
+    <string name="msg_token_fmt">fcm token received %1$s</string>
 </resources>
