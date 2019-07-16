@@ -22,6 +22,12 @@
             android:layout_width="150dp"
             android:layout_height="50dp" />
 
+        <Button
+            android:id="@+id/ptmPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PTM PAY" />
+
 
     </LinearLayout>
 
