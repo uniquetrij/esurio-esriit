@@ -40,4 +40,7 @@ dependencies {
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
     implementation 'org.apache.commons:commons-lang3:3.4'
 
+    //Google Pay Service
+    implementation 'com.google.android.gms:play-services-wallet:16.0.0'
+    implementation 'com.android.support:appcompat-v7:24.1.1'
 }

@@ -5,24 +5,22 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.github.nkzawa.socketio.client.IO;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.infy.esurio.R;
 import com.infy.esurio.esuriit.activities.main.fragments.FoodcourtListFragment;
+import com.infy.esurio.esuriit.activities.main.fragments.GooglePayFragment;
 import com.infy.esurio.esuriit.app.This;
-import com.infy.esurio.esuriit.app.services.FakerService;
-import com.infy.esurio.esuriit.app.services.FoodcourtService;
 import com.infy.esurio.middleware.DTO.FoodcourtsDTO;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
-import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.net.URISyntaxException;
 
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements FoodcourtListFrag
                     return true;
                 case R.id.navigation_notifications:
 //                    mTextMessage.setText(R.string.title_notifications);
+                    loadFragment(new GooglePayFragment());
                     return true;
             }
             return false;
